@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster Game</title>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="scoreboard row">
+            <div class="item">
+                <h1>YOU</h1>
+                <div class="scorebar">
+                    <div class="scorebar-div scorebar-player" :style="styleP">
+                        <span class="scorePercent--P">{{playerHealth}}%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <h1>Monster</h1>
+                <div class="scorebar">
+                    <div class="scorebar-div scorebar-monster" :style="styleM">
+                        <span class="scorePercent--M">{{monsterHealth}}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="controls row">
+            <div class="control_btns" v-show="isGamePlaying">
+                <div class="button attack_btn" @click="attack()">attack</div>
+                <div class="button special_btn" @click="specialAttack()">special Attack</div>
+                <div class="button heal_btn" @click="heal()">heal</div> 
+                <div class="button giveup_btn"  @click="isGamePlaying = !isGamePlaying">give up</div>
+            </div>
+            <div class="control_btns" @click="restart" v-show="!isGamePlaying">
+                <div class="button startgame_btn">start game</div>
+            </div>
+        </div>
+        <div class="notifications row" v-show="showLog">
+            <div class="notification-items" v-for="message in messageLog">
+                <p class=" player-attack">{{message.playerMessage}}</p>
+                <p class=" monster-attack">{{message.monsterMessage}}</p>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script src="script.js"></script>
+</body>
+</html>
